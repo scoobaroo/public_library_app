@@ -1,67 +1,30 @@
 Rails.application.routes.draw do
    root to: "users#index"
    get "/users", to: "users#index", as: "users"
-
    get "/users/new", to: "users#new", as: "new_user"
    post "/users", to: "users#create"
    get "/users/:id", to: "users#show", as: "user"
-   get "/login", to: "sessions#new"
+   get "/login", to: "sessions#new", as: "login"
    post "/sessions", to: "sessions#create"
    get "/logout", to: "sessions#destroy"
    get "users/:id/edit", to: "users#edit", as:"user_edit"
    patch "/users/:id", to: "users#update", as:"user_update"
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+   get "/libraries", to: "libraries#index", as: "libraries"
+   get "/libraries/new", to: "libraries#new", as: "new_library"
+   post "/libraries", to: "libraries#create"
+   get "/libraries/:id", to: "libraries#show", as: "library"
+   get "/users/:user_id/libraries", to: "library_users#index", as: "user_libraries"
+   post "/libraries/:library_id/users", to: "library_users#create", as: "library_users"
+   get "/libraries/:library_id/users", to: "library_users#show", as: "library_users_show"
+   get "/libraries/:library_id/edit", to: "libraries#edit", as: "library_edit"
+   patch "/libraries/:library_id", to: "libraries#update"
+   delete "/libraries/:library_id", to: "libraries#destroy"
+   get "/libraries/:library_id/books/new", to: "library_books#new", as: "new_book"
+   get "libraries/:library_id/books/:book_id/edit", to: "library_books#edit", as:"edit_book"
+   get "/libraries/:library_id/books/:book_id", to: "library_books#show", as: "library_book"
+   get "/libraries/:library_id/books", to: "library_books#index", as:"library_books"
+   get "/libraries/:library_id/books/:book_id", to: "library_books#show", as:"book"
+   post "/libraries/:library_id/books", to: "library_books#create"
+   patch "libraries/:library_id/books/:book_id", to: "library_books#update"
+   delete "/libraries/:library_id/books/:book_id", to: "library_books#destroy"
 end

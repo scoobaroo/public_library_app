@@ -1,0 +1,7 @@
+<%= @library.name %>
+<br>
+<h5>Has the following Users:</h5>
+<% @users.each do |user| %>
+<br>
+  <h2><%= link_to user.first_name, user_path(user) %></h2>
+<% end %>

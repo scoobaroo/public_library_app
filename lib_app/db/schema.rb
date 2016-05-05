@@ -11,10 +11,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503211535) do
+ActiveRecord::Schema.define(version: 20160504193403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "books", force: :cascade do |t|
+    t.string   "title"
+    t.string   "author"
+    t.integer  "releasedate"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "libraries", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "floor_count"
+    t.integer  "floor_area"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "library_books", force: :cascade do |t|
+    t.integer  "book_id"
+    t.integer  "library_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "library_books", ["book_id"], name: "index_library_books_on_book_id", using: :btree
+  add_index "library_books", ["library_id"], name: "index_library_books_on_library_id", using: :btree
+
+  create_table "library_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "library_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "library_users", ["library_id"], name: "index_library_users_on_library_id", using: :btree
+  add_index "library_users", ["user_id"], name: "index_library_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -25,4 +61,8 @@ ActiveRecord::Schema.define(version: 20160503211535) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "library_books", "books"
+  add_foreign_key "library_books", "libraries"
+  add_foreign_key "library_users", "libraries"
+  add_foreign_key "library_users", "users"
 end

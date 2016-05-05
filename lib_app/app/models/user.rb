@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
     @user.try(:authenticate, params[:password])
   end
   validates :email, uniqueness: true
+  has_many :library_users
+  has_many :libraries, through: :library_users, dependent: :destroy
 end

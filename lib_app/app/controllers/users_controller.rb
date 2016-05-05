@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :logged_in?, only: [:show]
   def index
     @users = User.all
     render :index
@@ -36,6 +37,7 @@ class UsersController < ApplicationController
   end
   def show
     @user = User.find_by_id(params[:id])
+    @libraries = @user.libraries
     time = @user.created_at
     @month=time.strftime("Created on %m/%d/%Y")
     @daytime=time.strftime("%I:%M%p")

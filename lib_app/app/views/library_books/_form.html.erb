@@ -1,0 +1,13 @@
+HELLO
+<%= form_for [@library, @book] do |f| %>
+  <div>
+    <%= f.text_field :title, placeholder: "Book Title" %>
+  </div>
+  <div>
+    <%= f.text_field :author, placeholder: "Book Author" %>
+  </div>
+  <div>
+    <%= f.text_field :releasedate, placeholder: "Book Release Date" %>
+  </div>
+  <%= f.submit "Submit",:class=>"btn btn-primary"%>
+<% end %>

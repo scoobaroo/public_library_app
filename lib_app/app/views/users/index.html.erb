@@ -2,4 +2,8 @@
 
 <div>
 There are currently <%= @users.length %> signed_up
+<% @users.each do |user| %>
+<br>
+<%= link_to user.email, user_path(user) %>
+<% end %>
 </div>

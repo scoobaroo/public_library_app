@@ -1,0 +1,13 @@
+<% @libraries.each do |library| %>
+  <div>
+    <h3>Name: <%=link_to library.name, library_path(library) %></h3>
+    <h3>Floor Count: <%= library.floor_count %></h3>
+    <h3>Floor Area: <%= library.floor_area %></h3>
+    <% if current_user %>
+      <%=button_to "Join", library_users_path(library), class:"btn btn-success" %>
+      <%=button_to "Delete", library, class:"btn btn-danger", method: :delete%>
+    <% end %>
+  </div>
+  <br>
+<% end %>
+<%= link_to "Create New Library", new_library_path , :class=>"btn btn-warning" %>

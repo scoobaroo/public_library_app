@@ -1,7 +1,13 @@
 <div>
   Welcome,<h3> <%= @user.email %> </h3>
+  <h3> <%= @user.first_name %> <%= @user.last_name %></h3>
   <br>
   Account created at:<strong> <%= @month %></strong>
   at Time : <strong><%= @daytime %></strong>
   <%= link_to "edit user", user_edit_path, :class=>"btn btn-success" %>
+  <br>
+  <h3> Libaries this User Belongs to:</h3>
+  <% @libraries.each do |lib| %>
+    <li><%=link_to lib.name, library_path(lib) %></li>
+  <% end %>
 </div>

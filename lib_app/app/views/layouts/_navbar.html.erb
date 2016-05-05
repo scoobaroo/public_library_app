@@ -5,6 +5,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li> <%=link_to "Index of All libraries", libraries_path %> </li>
+        <li> <%=link_to "Index of All Users", users_path %> </li>
         <% if current_user %>
           <li><%= link_to "Profile", user_path(current_user) %></li>
           <li><%= link_to "Log Out", logout_path %></li>
